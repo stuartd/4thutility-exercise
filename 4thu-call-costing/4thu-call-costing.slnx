@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../README.md" />
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="CallCosting.Api/CallCosting.Api.csproj" />
+  <Project Path="CallCosting.IntegrationTests/CallCosting.IntegrationTests.csproj" />
+  <Project Path="CallCosting.Tests/CallCosting.Tests.csproj" />
+</Solution>

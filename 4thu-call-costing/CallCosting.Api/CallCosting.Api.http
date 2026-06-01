@@ -1,0 +1,42 @@
+@CallCosting.Api_HostAddress = http://localhost:5152
+
+### Create or replace a customer rate card
+
+PUT {{CallCosting.Api_HostAddress}}/customers/1001/rate-card
+Content-Type: application/json
+
+{
+  "rates": [
+    { "callType": "UK", "costPerMinute": 0.05 },
+    { "callType": "UK Mobile", "costPerMinute": 0.80 },
+    { "callType": "USA", "costPerMinute": 0.30 },
+    { "callType": "Ireland", "costPerMinute": 0.12 },
+    { "callType": "International", "costPerMinute": 0.25 }
+  ]
+}
+
+### Get a customer rate card 
+
+GET {{CallCosting.Api_HostAddress}}/customers/1001/rate-card
+Accept: application/json
+
+### Get all stored rate cards
+
+GET {{CallCosting.Api_HostAddress}}/rate-cards
+Accept: application/json
+
+### Calculate call costs
+
+POST {{CallCosting.Api_HostAddress}}/calls/calculate-costs
+Content-Type: application/json
+
+{
+  "calls": [
+    {
+      "customerId": 1001,
+      "callDate": "2026-05-31T10:15:00Z",
+      "destinationNumber": "+441234567890",
+      "durationSeconds": 10
+    }
+  ]
+}

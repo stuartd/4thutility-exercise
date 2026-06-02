@@ -34,7 +34,7 @@ dotnet test .\4thu-call-costing\4thu-call-costing.slnx
 
 ## Rules and Behaviour
 
-- Number prefix matching is ordered, so `+447` is classified as `UK Mobile` rather than the `+44` UK rule.
+- Number prefix matching is done using 'longest first' order, so `+447` is classified as 'UK Mobile' rather than using the `+44` 'UK' rule.
 - Calls use whole-second durations and are billed per started minute.
 - Costs are rounded to two decimal places.
 - A single cost calculation request may include calls for different customers.
@@ -45,7 +45,7 @@ dotnet test .\4thu-call-costing\4thu-call-costing.slnx
 - Rate cards represent current active pricing only; previous rates are out of scope.
 - Call types are fixed reference data for this exercise.
 - Calls with a duration of zero seconds are still billed as one minute, as the call was connected just for a moment.
-- Customer IDs are non-negative - zero is accepted.
+- IDs can be zero.
 
 ## Design Notes
 
@@ -57,11 +57,11 @@ For this exercise, the customer rate-card table represents the current active ra
 
 Call types are treated as fixed reference data for the exercise. A production implementation would store them in a lookup table with stable identifiers and expose display names separately.
 
-## Improvements With More Time
+## Potential enhancements
 
 - Add EF migrations and environment-specific database configuration.
 - Add rate-card versions or effective date ranges for historical pricing.
-- Support partial success for batch cost calculation if the business wanted per-line errors.
+- Support partial success for batch cost calculation if the business needs per-line errors.
 - Add structured logging and request correlation.
 - Version the API
 - Increase resilience and detection of malformed inputs
